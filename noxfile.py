@@ -6,12 +6,15 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import boto3
 import nox
 
 nox.options.stop_on_first_error = True
 
 IN_CI = os.getenv("CI", "").lower() == "true"
 ERADICATE_PREVIOUS_BUILDS = False
+BUILD_DIR = Path("_build").resolve()
+SITE = "misterdoubt.com"
 
 
 @nox.session(python=False)
@@ -21,15 +24,14 @@ def lint(session):
 
 @nox.session(python=False)
 def build(session):
-    output_dir = Path("_build").resolve()
     if ERADICATE_PREVIOUS_BUILDS:
-        shutil.rmtree(output_dir, ignore_errors=True)
+        shutil.rmtree(BUILD_DIR, ignore_errors=True)
     session.run(
         "python",
         "-m",
         "sphinx",
         ".",
-        str(output_dir),
+        str(BUILD_DIR),
         "-q",  # only output problems
         "-a",  # don't reuse old output
         "-E",  # don't reuse previous environment
@@ -37,7 +39,7 @@ def build(session):
         "-W",  # warnings are errors
         "--keep-going",  # gather all warnings before exit
     )
-    print(f"Documentation at {output_dir / 'index.html'}")
+    print(f"Documentation at {BUILD_DIR / 'index.html'}")
 
 
 @nox.session(python=False)
@@ -52,6 +54,20 @@ def autopush(session):
         print(git_output.decode("ascii").rstrip())
         session.skip("Local repo is not clean")
     subprocess.check_output(["git", "push"])
+
+
+@nox.session(python=False)
+def bucket(session):
+    awsession = boto3.session.Session()
+    s3 = awsession.resource("s3")
+    print(s3)
+    for path in BUILD_DIR.glob("**/*"):
+        if not path.is_file():
+            continue
+        if "doctree" in str(path):
+            continue
+        key = path.relative_to(BUILD_DIR)
+        s3.meta.client.upload_file(str(path), SITE, str(key))
 
 
 if __name__ == "__main__":

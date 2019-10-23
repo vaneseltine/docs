@@ -1,0 +1,4 @@
+boto
+Sphinx
+nox
+doc8
