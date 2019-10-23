@@ -18,13 +18,10 @@ https://hugotunius.se/2016/01/10/the-one-cent-blog.html
 
 ::
 
-    [X] html generation
-
-    [X] html -> s3
-
-    [ ] s3 -> website
-
-    [ ] website -> misterdoubt.com
+    [X] rst -> html (Sphinx)
+    [X] html -> s3 (boto3)
+    [ ] s3 -> website (aws)
+    [ ] website -> misterdoubt.com (aws, gandi)
 
 Indices and tables
 ==================
