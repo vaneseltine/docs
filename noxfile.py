@@ -2,10 +2,8 @@
 """Invoke via `nox` or `python -m nox`"""
 
 import os
-import re
 import shutil
 import subprocess
-import sys
 from pathlib import Path
 
 import nox
@@ -13,19 +11,19 @@ import nox
 nox.options.stop_on_first_error = True
 
 IN_CI = os.getenv("CI", "").lower() == "true"
+ERADICATE_PREVIOUS_BUILDS = False
 
 
 @nox.session(python=False)
 def lint(session):
-    session.run("doc8", ".")
+    session.run("doc8", ".", "-q")
 
 
 @nox.session(python=False)
 def build(session):
-    # if IN_CI:
-    # session.skip("Not building on CI")
     output_dir = Path("_build").resolve()
-    # shutil.rmtree(output_dir, ignore_errors=True)  # eradicate previous build
+    if ERADICATE_PREVIOUS_BUILDS:
+        shutil.rmtree(output_dir, ignore_errors=True)
     session.run(
         "python",
         "-m",
@@ -45,11 +43,12 @@ def build(session):
 @nox.session(python=False)
 def autopush(session):
     if IN_CI:
-        session.skip("Not in CI")
+        session.skip("Don't autopush from CI")
     if not nox.options.stop_on_first_error:
-        session.skip("Error-free runs required")
+        session.skip("Don't autopush without requiring error-free run")
     git_output = subprocess.check_output(["git", "status", "--porcelain"])
     if git_output:
+        print("Dirty repo:")
         print(git_output.decode("ascii").rstrip())
         session.skip("Local repo is not clean")
     subprocess.check_output(["git", "push"])
