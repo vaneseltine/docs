@@ -16,7 +16,12 @@ https://news.ycombinator.com/item?id=13021722
 
 https://hugotunius.se/2016/01/10/the-one-cent-blog.html
 
+::
 
+    [X] rst -> html (Sphinx)
+    [X] html -> s3 (boto3)
+    [ ] s3 -> website (aws)
+    [ ] website -> misterdoubt.com (aws, gandi)
 
 Indices and tables
 ==================

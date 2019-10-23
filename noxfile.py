@@ -43,20 +43,6 @@ def build(session):
 
 
 @nox.session(python=False)
-def autopush(session):
-    if IN_CI:
-        session.skip("Don't autopush from CI")
-    if not nox.options.stop_on_first_error:
-        session.skip("Don't autopush without requiring error-free run")
-    git_output = subprocess.check_output(["git", "status", "--porcelain"])
-    if git_output:
-        print("Dirty repo:")
-        print(git_output.decode("ascii").rstrip())
-        session.skip("Local repo is not clean")
-    subprocess.check_output(["git", "push"])
-
-
-@nox.session(python=False)
 def bucket(session):
     awsession = boto3.session.Session()
     s3 = awsession.resource("s3")
@@ -68,6 +54,20 @@ def bucket(session):
             continue
         key = path.relative_to(BUILD_DIR)
         s3.meta.client.upload_file(str(path), SITE, str(key))
+
+
+@nox.session(python=False)
+def autopush(session):
+    if IN_CI:
+        session.skip("Don't autopush from CI")
+    if not nox.options.stop_on_first_error:
+        session.skip("Don't autopush without requiring error-free run")
+    git_output = subprocess.check_output(["git", "status", "--porcelain"])
+    if git_output:
+        print("Dirty repo:")
+        print(git_output.decode("ascii").rstrip())
+        session.skip("Local repo is not clean")
+    subprocess.check_output(["git", "push"])
 
 
 if __name__ == "__main__":

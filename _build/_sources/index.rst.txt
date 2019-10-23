@@ -16,7 +16,15 @@ https://news.ycombinator.com/item?id=13021722
 
 https://hugotunius.se/2016/01/10/the-one-cent-blog.html
 
+::
 
+    [X] html generation
+
+    [X] html -> s3
+
+    [ ] s3 -> website
+
+    [ ] website -> misterdoubt.com
 
 Indices and tables
 ==================
