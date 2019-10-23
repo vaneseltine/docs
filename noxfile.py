@@ -4,6 +4,7 @@
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import boto3
@@ -12,14 +13,20 @@ import nox
 nox.options.stop_on_first_error = True
 
 IN_CI = os.getenv("CI", "").lower() == "true"
+IN_WINDOWS = sys.platform.startswith("win")
 ERADICATE_PREVIOUS_BUILDS = False
+
 BUILD_DIR = Path("_build").resolve()
 SITE = "misterdoubt.com"
 
 
 @nox.session(python=False)
 def lint(session):
-    session.run("doc8", ".", "-q")
+    cmd = ["doc8", ".", "-q"]
+    if IN_WINDOWS:
+        cmd.append('--ignore=D002,D004')
+    print(cmd)
+    session.run(*cmd)
 
 
 @nox.session(python=False)
