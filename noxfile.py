@@ -9,6 +9,7 @@ from pathlib import Path
 
 import boto3
 import nox
+from zope.contenttype import guess_content_type
 
 nox.options.stop_on_first_error = True
 
@@ -24,7 +25,7 @@ SITE = "misterdoubt.com"
 def lint(session):
     cmd = ["doc8", ".", "-q"]
     if IN_WINDOWS:
-        cmd.append('--ignore=D002,D004')
+        cmd.append("--ignore=D002,D004")
     print(cmd)
     session.run(*cmd)
 
@@ -43,7 +44,7 @@ def build(session):
         "-a",  # don't reuse old output
         "-E",  # don't reuse previous environment
         "-n",  # nitpicky mode
-        "-W",  # warnings are errors
+        # "-W",  # warnings are errors
         "--keep-going",  # gather all warnings before exit
     )
     print(f"Documentation at {BUILD_DIR / 'index.html'}")
@@ -51,16 +52,30 @@ def build(session):
 
 @nox.session(python=False)
 def bucket(session):
-    awsession = boto3.session.Session()
-    s3 = awsession.resource("s3")
-    print(s3)
+    # awsession = boto3.session.Session()
+    # s3 = awsession.resource("s3")
+    s3 = boto3.resource("s3")
+    bucket = s3.Bucket(SITE)
     for path in BUILD_DIR.glob("**/*"):
         if not path.is_file():
             continue
         if "doctree" in str(path):
             continue
-        key = path.relative_to(BUILD_DIR)
-        s3.meta.client.upload_file(str(path), SITE, str(key))
+        key = str(path.relative_to(BUILD_DIR))
+        content_type, encoding = guess_content_type(str(path), path.read_bytes())
+        print(key, content_type, encoding)
+        bucket.put_object(
+            Key=key,
+            Body=path.read_bytes(),
+            ContentType=content_type,
+            ContentEncoding=encoding or "",
+        )
+        # obj = bucket.Object(key)
+        # if content_type := CONTENT_TYPES.get(path.suffix):
+        #     obj.content_type = content_type
+        # obj.set_contents_from_string(path.read_text(), policy='public-read')
+        # bucket.put_object(Key=key, Body=path.read_text())
+        # s3.meta.client.upload_file(str(path), SITE, str(key))
 
 
 @nox.session(python=False)
