@@ -1,33 +1,19 @@
 .. You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+    contain the root `toctree` directive.
 
-Welcome to docs
+docs
 ================================
 
+Contents
+----------------------------
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 1
 
+    about
+    projects
+    todo
 
-TODO
---------------------------------
+:ref:`genindex`
 
-https://news.ycombinator.com/item?id=13021722
-
-https://hugotunius.se/2016/01/10/the-one-cent-blog.html
-
-::
-
-    [X] rst -> html (Sphinx)
-    [X] html -> s3 (boto3)
-    [ ] s3 -> website (aws)
-    [ ] website -> misterdoubt.com (aws, gandi)
-    [ ] ssl
-    [ ] https only
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
+:ref:`search`

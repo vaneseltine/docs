@@ -15,7 +15,9 @@ nox.options.stop_on_first_error = True
 
 IN_CI = os.getenv("CI", "").lower() == "true"
 IN_WINDOWS = sys.platform.startswith("win")
-ERADICATE_PREVIOUS_BUILDS = False
+ERADICATE_PREVIOUS_BUILDS = True
+
+COMPLETE_REUPLOAD = False
 
 BUILD_DIR = Path("_build").resolve()
 SITE = "misterdoubt.com"
@@ -26,7 +28,6 @@ def lint(session):
     cmd = ["doc8", ".", "-q"]
     if IN_WINDOWS:
         cmd.append("--ignore=D002,D004")
-    print(cmd)
     session.run(*cmd)
 
 
@@ -56,7 +57,8 @@ def bucket(session):
     # s3 = awsession.resource("s3")
     s3 = boto3.resource("s3")
     bucket = s3.Bucket(SITE)
-    for path in BUILD_DIR.glob("**/*"):
+    GLOB = "**/*" if COMPLETE_REUPLOAD else "**/*.html"
+    for path in BUILD_DIR.glob(GLOB):
         if not path.is_file():
             continue
         if "doctree" in str(path):
