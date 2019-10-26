@@ -28,6 +28,10 @@ exclude_patterns = ["_build", "__pycache__" ".git", ".nox", ".venv", ".vscode"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+# not completely unusable:
+# - basic
+# - classic
+# - sphinxdoc
 html_theme_path = [alabaster.get_path()]
 extensions += ["alabaster"]
 html_theme = "alabaster"
@@ -43,8 +47,8 @@ html_theme_options = {
     # "logo": "logo.png",
     "logo_name": True,
     "canonical_url": "https://misterdoubt.com",
-    "logo_text_align": "center",
-    "description": "desc",
+    "logo_text_align": "left",
+    "description": "somewhere between a personal wiki and a blog",
     "show_powered_by": True,
     "show_relbars": True,
     "show_related": False,
