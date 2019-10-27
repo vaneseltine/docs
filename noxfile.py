@@ -20,7 +20,6 @@ nox.options.stop_on_first_error = True
 
 IN_CI = os.getenv("CI", "").lower() == "true"
 IN_WINDOWS = sys.platform.startswith("win")
-ERADICATE_PREVIOUS_BUILDS = True
 
 COMPLETE_REUPLOAD = False
 
@@ -38,8 +37,7 @@ def lint(session):
 
 @nox.session(python=False)
 def build(session):
-    if ERADICATE_PREVIOUS_BUILDS:
-        shutil.rmtree(BUILD_DIR, ignore_errors=True)
+    shutil.rmtree(BUILD_DIR, ignore_errors=True)
     session.run(
         "python",
         "-m",
@@ -100,15 +98,18 @@ def need_to_upload(path):
     s = str(path)
     if "doctree" in s:
         return False
+    if path.name in (".buildinfo"):
+        return False
     return True
 
 
-def upload(bucket, *, path=None, key=None):
+def upload(bucket=SITE, *, path=None, key=None):
     key = key or path_to_key(path)
     path = path or key_to_path(key)
     content = path.read_bytes()
     content_type, encoding = guess_content_type(str(path), content)
-    # print(key, content_type, encoding)
+
+    print(f"Uploading {key} ({content_type}, {encoding})")
     bucket.put_object(
         Key=key, Body=content, ContentType=content_type, ContentEncoding=encoding or ""
     )
@@ -142,7 +143,7 @@ def update_bucket(session):
     new_repo_keys = repo_keys - site_keys
     print(f"{len(new_repo_keys)} new repo keys")  # , *new_repo_keys, sep="\n  ")
     for key in new_repo_keys:
-        print(f"Uploading {path} to {key}...")
+        print(f"Uploading {key}...")
         upload(bucket, key=key)
 
     # 5 for intersection, check diff; update as needed
@@ -155,9 +156,8 @@ def update_bucket(session):
             site_content = Path(tmp.name).read_bytes()
         repo_content = current_repo[key].read_bytes()
         path = key_to_path(key)
-        if repo_content != site_content:
-            print(f"Updating {key}...")
-            s3.meta.client.upload_file(str(path), SITE, key)
+        if COMPLETE_REUPLOAD or repo_content != site_content:
+            upload(bucket, path=path, key=key)
 
 
 @nox.session(python=False)
