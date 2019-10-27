@@ -10,6 +10,9 @@ https://github.com/vaneseltine/nominally
 
 https://github.com/vaneseltine/nominally-examples
 
+.. index::
+    single: todo
+
 in flux
 --------------------------
 

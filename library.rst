@@ -1,3 +1,7 @@
+.. index::
+    single: todo
+    single: meta
+
 library
 ###############
 
@@ -18,7 +22,7 @@ improve genindex
 
 https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#index-generating-markup
 
-update
+updater
 --------------------------------
 
 - download the file attached to each key (from bucket)
