@@ -55,70 +55,38 @@ def build(session):
 
 
 @nox.session(python=False)
-def bucket(session):
-    session.skip("Not auto-run.")
-    # awsession = boto3.session.Session()
-    # s3 = awsession.resource("s3")
-    s3 = boto3.resource("s3")
-    bucket = s3.Bucket(SITE)
-    GLOB = "**/*" if COMPLETE_REUPLOAD else "**/*.html"
-    for path in BUILD_DIR.glob(GLOB):
+def update_bucket(session):
+    def path_to_key(path):
+        return str(path.relative_to(BUILD_DIR))
+
+    def key_to_path(s):
+        return BUILD_DIR / s
+
+    def need_to_upload(path):
         if not path.is_file():
-            continue
-        if "doctree" in str(path):
-            continue
-        key = str(path.relative_to(BUILD_DIR))
-        content_type, encoding = guess_content_type(str(path), path.read_bytes())
-        print(key, content_type, encoding)
+            return False
+        s = str(path)
+        if "doctree" in s:
+            return False
+        if path.name in (".buildinfo"):
+            return False
+        return True
+
+    def upload(bucket, *, path=None, key=None):
+        key = key or path_to_key(path)
+        path = path or key_to_path(key)
+        content = path.read_bytes()
+        content_type, encoding = guess_content_type(str(path), content)
+
+        print(f"Uploading {key} ({content_type}, {encoding})")
         bucket.put_object(
             Key=key,
-            Body=path.read_bytes(),
+            Body=content,
             ContentType=content_type,
             ContentEncoding=encoding or "",
         )
-        # obj = bucket.Object(key)
-        # if content_type := CONTENT_TYPES.get(path.suffix):
-        #     obj.content_type = content_type
-        # obj.set_contents_from_string(path.read_text(), policy='public-read')
-        # bucket.put_object(Key=key, Body=path.read_text())
-        # s3.meta.client.upload_file(str(path), SITE, str(key))
 
-
-def path_to_key(path):
-    return str(path.relative_to(BUILD_DIR))
-
-
-def key_to_path(s):
-    return BUILD_DIR / s
-
-
-def need_to_upload(path):
-    if not path.is_file():
-        return False
-    s = str(path)
-    if "doctree" in s:
-        return False
-    if path.name in (".buildinfo"):
-        return False
-    return True
-
-
-def upload(bucket=SITE, *, path=None, key=None):
-    key = key or path_to_key(path)
-    path = path or key_to_path(key)
-    content = path.read_bytes()
-    content_type, encoding = guess_content_type(str(path), content)
-
-    print(f"Uploading {key} ({content_type}, {encoding})")
-    bucket.put_object(
-        Key=key, Body=content, ContentType=content_type, ContentEncoding=encoding or ""
-    )
-
-
-@nox.session(python=False)
-def update_bucket(session):
-
-    # 2 generate a key for each file (from current repo)
+    # 1 generate a key for each file (from current repo)
     current_repo = {
         path_to_key(path): path
         for path in BUILD_DIR.glob("**/*")
@@ -126,29 +94,26 @@ def update_bucket(session):
     }
     repo_keys = set(current_repo)
 
-    # 1 download the file attached to each key (from bucket)
+    # 2 download the file attached to each key (from bucket)
     s3 = boto3.resource("s3")
     bucket = s3.Bucket(SITE)
     site_objects = {obj.key: obj for obj in bucket.objects.all()}
     site_keys = set(site_objects)
 
-    # 4 delete keys with no files
-    orphaned_site_keys = site_keys - repo_keys
-    print(f"{len(orphaned_site_keys)} orphaned")  # , *orphaned_site_keys, sep="\n  ")
-    for key in orphaned_site_keys:
+    old_site_keys = site_keys - repo_keys
+    print(f"{len(old_site_keys):>3} old site keys")
+    for key in old_site_keys:
         print(f"Deleting {key}...")
         site_objects[key].delete()
 
-    # 3 upload files with no keys
     new_repo_keys = repo_keys - site_keys
-    print(f"{len(new_repo_keys)} new repo keys")  # , *new_repo_keys, sep="\n  ")
+    print(f"{len(new_repo_keys):>3} new repo keys")
     for key in new_repo_keys:
         print(f"Uploading {key}...")
         upload(bucket, key=key)
 
-    # 5 for intersection, check diff; update as needed
     shared_keys = repo_keys & site_keys
-    print(f"{len(shared_keys)} shared keys")  # , *shared_keys, sep="\n  ")
+    print(f"{len(shared_keys):>3} shared keys")
 
     for key in sorted(shared_keys):
         with NamedTemporaryFile() as tmp:

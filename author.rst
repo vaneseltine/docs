@@ -1,4 +1,4 @@
-about
+author
 =======
 
 `github.com/vaneseltine/ <https://github.com/vaneseltine/>`_

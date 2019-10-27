@@ -10,8 +10,9 @@ top
 .. toctree::
     :maxdepth: 1
 
-    about
+    author
     community
+    projects/kdm
     library
     projects
     todo
