@@ -45,7 +45,9 @@ infrastructure
     [ ] www.mrdoubt.com -> https://misterdoubt.com
     [X] http://misterdoubt.com -> https://misterdoubt.com
     [ ] http://www.misterdoubt.com -> https://misterdoubt.com
-    [ ] minimize file duplication (https://console.aws.amazon.com/billing/home?#/freetier)
+    [X] minimize file duplication
+
+https://console.aws.amazon.com/billing/home?#/freetier
 
 new theme?
 ------------
