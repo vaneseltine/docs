@@ -4,20 +4,21 @@
 welcome
 ================================
 
-top
+core
 ----------------------------
 
 .. toctree::
     :maxdepth: 1
+    :glob:
 
-    author
-    collect
-    community
-    projects/kdm
-    library
-    projects
-    todo
+    core/*
+    core/various/*
 
-:ref:`genindex`
+projects
+----------------------------
 
-:ref:`search`
+.. toctree::
+    :maxdepth: 1
+    :glob:
+
+    core/projects/*
