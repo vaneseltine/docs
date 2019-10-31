@@ -11,6 +11,7 @@ top
     :maxdepth: 1
 
     author
+    collect
     community
     projects/kdm
     library
