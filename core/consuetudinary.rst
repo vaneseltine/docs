@@ -2,7 +2,7 @@
     single: todo
     single: meta
 
-library
+consuetudinary
 ###############
 
 notes

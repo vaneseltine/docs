@@ -48,7 +48,7 @@ def build(session):
         "-a",  # don't reuse old output
         "-E",  # don't reuse previous environment
         "-n",  # nitpicky mode
-        # "-W",  # warnings are errors
+        "-W",  # warnings are errors
         "--keep-going",  # gather all warnings before exit
     )
     print(f"Documentation at {BUILD_DIR / 'index.html'}")

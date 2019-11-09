@@ -2,7 +2,7 @@
 
 import alabaster
 
-project = "library"
+project = "consuetudinary"
 copyright = "2019, Matt VanEseltine"
 author = "Matt VanEseltine"
 
@@ -44,14 +44,14 @@ html_favicon = "./static/favicon.ico"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_theme_options = {
     "fixed_sidebar": True,
-    # "logo": "logo.png",
-    "logo_name": True,
+    "logo": "logo.png",
+    "logo_name": False,
     "canonical_url": "https://misterdoubt.com",
-    "logo_text_align": "left",
-    "description": "somewhere between a personal wiki and a blog",
+    "logo_text_align": "center",
+    "description": "a book of customs, traditions, and principles",
     "show_powered_by": True,
     "show_relbars": True,
     "show_related": False,
 }
 html_show_sphinx = False
-html_title = "library"
+html_title = "consuetudinary"
