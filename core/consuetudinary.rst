@@ -1,5 +1,4 @@
 .. index::
-    single: todo
     single: meta
 
 consuetudinary
@@ -9,9 +8,11 @@ This consuetudinary is licensed under a
 `Creative Commons Attribution 4.0 International License
 <"http://creativecommons.org/licenses/by/4.0/">`_.
 
-All text has been written by Matt VanEseltine.
+All text has been written by
+`Matt VanEseltine <https://github.com/vaneseltine/>`_.
 
-The book logo was designed by `Julien Deveaux <https://thenounproject.com/Julihan/>`_.
+The book logo was designed by
+`Julien Deveaux <https://thenounproject.com/Julihan/>`_.
 
 notes
 =====================
@@ -21,22 +22,6 @@ notes
 <https://news.ycombinator.com/item?id=13021722>`_
 
 https://hugotunius.se/2016/01/10/the-one-cent-blog.html
-
-
-
-infrastructure
---------------------------------
-
-- [X] rst -> html (Sphinx)
-- [X] html -> s3 (boto3)
-- [X] s3 -> website (aws)
-- [X] ssl
-- [_] www ->  www.misterdoubt.com -> https://misterdoubt.com
-- [X] mrdoubt.com -> https://misterdoubt.com
-- [_] www.mrdoubt.com -> https://misterdoubt.com
-- [X] http://misterdoubt.com -> https://misterdoubt.com
-- [_] http://www.misterdoubt.com -> https://misterdoubt.com
-- [X] minimize file duplication
 
 sphinx
 ===========================
@@ -48,10 +33,8 @@ Considering improving the usefulness of genindex: `sphinx-doc.org :: directives
 
 `sphinx-git
 <https://sphinx-git.readthedocs.io/en/stable/using.html#git-changelog-directive>`_
-provides two directives:
-
-- ``git_changelog`` to include various changelogs
-- ``git_commit_detail`` to detail the current commit at time of build
+provides two directives: ``git_changelog`` to include various changelogs;
+``git_commit_detail`` to detail the current commit at time of build.
 
 more decent themes
 ---------------------------
@@ -63,6 +46,3 @@ more decent themes
 - `OE <https://sphinx-themes.org/html/oe-sphinx-theme/oe_sphinx/basic.html>`_
 - `Fossaisa <https://sphinx-themes.org/html/sphinx-fossasia-theme/sphinx_fossasia_theme/basic.html>`_
 - `nameko <https://github.com/nameko/sphinx-nameko-theme>`_
-
-misc
----------
