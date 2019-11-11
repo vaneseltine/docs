@@ -127,7 +127,7 @@ def update_aws(session):
         content = path.read_bytes()
         content_type, encoding = guess_content_type(str(path), content)
 
-        print(f"Uploading {key} ({content_type}, {encoding})")
+        # print(f"Uploading {key} ({content_type}, {encoding})")
         bucket.put_object(
             Key=key,
             Body=content,
