@@ -1,5 +1,5 @@
 author
-#######
+######
 
 This consuetudinary is licensed under a
 `Creative Commons Attribution 4.0 International License
@@ -12,7 +12,7 @@ The book logo was designed by
 `Julien Deveaux <https://thenounproject.com/Julihan/>`_.
 
 see also
-=====================
+========
 
 `Ask HN: What free or low-cost static site hosting do you use most?
 <https://news.ycombinator.com/item?id=13021722>`_

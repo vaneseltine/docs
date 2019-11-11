@@ -1,8 +1,8 @@
 projects
-=========
+========
 
 stable
---------------------------
+------
 
 nominally, a human name parser in Python
     - https://pypi.org/project/nominally/
@@ -14,7 +14,7 @@ i3egg, a simplistic timer for i3wm
     - https://pypi.org/project/i3egg/
 
 not so stable
---------------------------
+-------------
 
 laforge
     - https://pypi.org/project/laforge/
@@ -22,7 +22,7 @@ laforge
 
 
 half-baked
----------------------------
+----------
 
 impute-gender
     - https://github.com/vaneseltine/impute-gender
@@ -31,7 +31,7 @@ typographize
     - https://github.com/vaneseltine/typographize
 
 more pages
------------------------------
+----------
 
 .. toctree::
     :maxdepth: 1

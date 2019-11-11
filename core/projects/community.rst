@@ -1,5 +1,5 @@
 community
-===============
+=========
 
 https://github.com/psf/black
 

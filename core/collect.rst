@@ -1,5 +1,5 @@
 collect
-=========
+=======
 
 .. toctree::
     :glob:
