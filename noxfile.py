@@ -66,7 +66,7 @@ def update_bucket(session):
         if not path.is_file():
             return False
         s = str(path)
-        if "doctree" in s:
+        if "doctree" in s or "_sources" in s:
             return False
         if path.name in (".buildinfo"):
             return False

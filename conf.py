@@ -54,4 +54,6 @@ html_theme_options = {
     "show_related": False,
 }
 html_show_sphinx = False
+html_show_sourcelink = False
+
 html_title = "consuetudinary"
