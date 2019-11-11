@@ -28,3 +28,17 @@ notes
 
 Considering improving the usefulness of genindex: `sphinx-doc.org :: directives
 <https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html>`_.
+
+graphviz
+========
+
+.. graphviz::
+
+    digraph graphname {
+        graph [rankdir=LR, bgcolor="transparent"]
+        a -> b
+        b -> c -> d
+        b -> e -> f
+        f -> g
+        d -> g
+    }

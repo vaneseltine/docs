@@ -3,7 +3,6 @@
 
 import fileinput
 import logging
-import os
 import re
 import shutil
 import subprocess
@@ -20,10 +19,10 @@ for shhhhh in ["boto3", "urllib3", "botocore", "s3transfer"]:
 
 nox.options.stop_on_first_error = True
 
-IN_CI = os.getenv("CI", "").lower() == "true"
 IN_WINDOWS = sys.platform.startswith("win")
 
 COMPLETE_REUPLOAD = False
+DEPLOYABLE = False
 
 BUILD_DIR = Path("_build").resolve()
 SITE = "misterdoubt.com"
@@ -88,7 +87,24 @@ def build(session):
 
 
 @nox.session(python=False)
-def update_bucket(session):
+def push(session):
+    git_output = subprocess.check_output(["git", "status", "--porcelain"])
+    if git_output:
+        print("Dirty repo:")
+        print(git_output.decode("ascii").rstrip())
+        session.skip("Local repo is not clean")
+    subprocess.check_output(["git", "push"])
+    global DEPLOYABLE
+    DEPLOYABLE = True
+
+
+@nox.session(python=False)
+def update_aws(session):
+    if IN_WINDOWS:
+        session.skip("Not deploying from Windows")
+    if not DEPLOYABLE:
+        session.skip("Not cleared to deploy")
+
     def path_to_key(path):
         return str(path.relative_to(BUILD_DIR))
 
@@ -156,20 +172,6 @@ def update_bucket(session):
         path = key_to_path(key)
         if COMPLETE_REUPLOAD or repo_content != site_content:
             upload(bucket, path=path, key=key)
-
-
-@nox.session(python=False)
-def autopush(session):
-    if IN_CI:
-        session.skip("Don't autopush from CI")
-    if not nox.options.stop_on_first_error:
-        session.skip("Don't autopush without requiring error-free run")
-    git_output = subprocess.check_output(["git", "status", "--porcelain"])
-    if git_output:
-        print("Dirty repo:")
-        print(git_output.decode("ascii").rstrip())
-        session.skip("Local repo is not clean")
-    subprocess.check_output(["git", "push"])
 
 
 if __name__ == "__main__":

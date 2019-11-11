@@ -12,17 +12,3 @@ is hosted on `GitHub <https://github.com/vaneseltine/docs/>`_.
 
 The neutral-face book logo was designed by
 `Julien Deveaux <https://thenounproject.com/Julihan/>`_.
-
-graphviz
-========
-
-.. graphviz::
-
-    digraph graphname {
-        graph [rankdir=LR, bgcolor="transparent"]
-        a -> b
-        b -> c -> d
-        b -> e -> f
-        f -> g
-        d -> g
-    }
