@@ -8,3 +8,9 @@ see also
 <https://news.ycombinator.com/item?id=13021722>`_
 
 https://hugotunius.se/2016/01/10/the-one-cent-blog.html
+
+https://chrisalbon.com/
+
+https://maxmasnick.com/kb/
+
+https://github.com/RichardLitt/meta-knowledge

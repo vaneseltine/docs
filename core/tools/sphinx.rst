@@ -4,6 +4,8 @@
 sphinx
 ######
 
+https://www.sphinx-doc.org/en/master/usage/markdown.html
+
 `Sphinx awesome list <https://github.com/yoloseem/awesome-sphinxdoc>`_.
 
 `sphinx-git
