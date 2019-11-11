@@ -8,7 +8,7 @@ author = "Matt VanEseltine"
 
 # -- General configuration ---------------------------------------------------
 
-extensions = []
+extensions = ["sphinx.ext.graphviz"]
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -49,9 +49,7 @@ html_theme_options = {
     "canonical_url": "https://misterdoubt.com",
     "logo_text_align": "center",
     "description": (
-        r"con·sue·tu·di·nar·y:<br>"
-        # r"<em>noun</em>:<br>"
-        "a book of customs, traditions, and principles."
+        r"con·sue·tu·di·nar·y:<br>a book of customs, traditions, and principles."
     ),
     "show_powered_by": False,
     "show_relbars": True,

@@ -1,8 +1,10 @@
 #! /usr/bin/env python3
 """Invoke via `nox` or `python -m nox`"""
 
+import fileinput
 import logging
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -25,6 +27,36 @@ COMPLETE_REUPLOAD = False
 
 BUILD_DIR = Path("_build").resolve()
 SITE = "misterdoubt.com"
+
+
+def gather_rsts(folder):
+    return list(Path(folder).glob("**/*.rst"))
+
+
+def handle_line(line, last_len):
+    if not re.match(r"^[=*#-]{3,}", line):
+        return line
+    if len(line) == last_len:
+        return line
+    new_line = line[0] * (last_len - 1) + "\n"
+    return new_line
+
+
+@nox.session(python=False)
+def format(session):
+
+    rsts = gather_rsts(Path("./core"))
+    # print(f"{len(rsts)} input files.")
+    changes = 0
+    for rst in rsts:
+        last_len = 0
+        for line in fileinput.input(rst, inplace=True):
+            output = handle_line(line, last_len)
+            changes += line != output
+            print(output, end="")
+            last_len = len(line)
+    # print(f"{changes} lines changed.")
+    return 0
 
 
 @nox.session(python=False)

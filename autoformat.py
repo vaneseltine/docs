@@ -24,9 +24,9 @@ def plural(i):
     return "" if i == 1 else "s"
 
 
-def main():
-    rsts = gather_rsts(Path("./core"))
-    print(f"{len(rsts)} input files.")
+def autoformat_rst(path="./core"):
+    rsts = gather_rsts(Path(path))
+    # print(f"{len(rsts)} input files.")
     changes = 0
     for rst in rsts:
         last_len = 0
@@ -35,8 +35,9 @@ def main():
             changes += line != output
             print(output, end="")
             last_len = len(line)
-    print(f"{changes} line{plural(changes)} changed.")
+    # print(f"{changes} line{plural(changes)} changed.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    autoformat_rst()

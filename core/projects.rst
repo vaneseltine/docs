@@ -39,9 +39,15 @@ more pages
 
     projects/*
 
+.. graphviz::
+
+   digraph foo {
+      "bar" -> "baz";
+   }
+
 
 see also
----------
+--------
 
 `Ask HN: What free or low-cost static site hosting do you use most?
 <https://news.ycombinator.com/item?id=13021722>`_
