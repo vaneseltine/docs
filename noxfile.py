@@ -29,33 +29,34 @@ BUILD_DIR = Path("_build").resolve()
 SITE = "misterdoubt.com"
 
 
-def gather_rsts(folder):
-    return list(Path(folder).glob("**/*.rst"))
-
-
-def handle_line(line, last_len):
-    if not re.match(r"^[=*#-]{3,}", line):
-        return line
-    if len(line) == last_len:
-        return line
-    new_line = line[0] * (last_len - 1) + "\n"
-    return new_line
-
-
 @nox.session(python=False)
 def format(session):
+    def handle_line(line, last_len):
+        if not re.match(r"^[=*#-]{3,}", line):
+            return line
+        if len(line) == last_len:
+            return line
+        new_line = line[0] * (last_len - 1) + "\n"
+        return new_line
 
-    rsts = gather_rsts(Path("./core"))
-    # print(f"{len(rsts)} input files.")
+    rsts = list(Path("./core").glob("**/*.rst"))
+    print(f"{len(rsts)} input files.")
     changes = 0
     for rst in rsts:
         last_len = 0
+        original_text = rst.read_text()
         for line in fileinput.input(rst, inplace=True):
             output = handle_line(line, last_len)
             changes += line != output
             print(output, end="")
             last_len = len(line)
-    # print(f"{changes} lines changed.")
+        new_text = rst.read_text()
+        if len(original_text.splitlines()) != len(new_text.splitlines()):
+            print("YIKES!", "%" * 60, original_text, "&" * 60, new_text, sep="\n\n")
+            rst.write_text(original_text)
+            raise RuntimeError("Line counts did not match")
+
+    print(f"{changes} lines changed.")
     return 0
 
 
@@ -128,7 +129,7 @@ def update_bucket(session):
 
     # 2 download the file attached to each key (from bucket)
     s3 = boto3.resource("s3")
-    bucket = s3.Bucket(SITE)
+    bucket = s3.Bucket(SITE)  # pylint: disable=no-member
     site_objects = {obj.key: obj for obj in bucket.objects.all()}
     site_keys = set(site_objects)
 
