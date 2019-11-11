@@ -7,14 +7,8 @@ This consuetudinary is licensed under a
 
 All text has been written by
 `Matt VanEseltine <https://github.com/vaneseltine/>`_.
+A repository with sources and code to support compilation of this work
+is hosted on `GitHub <https://github.com/vaneseltine/docs/>`_.
 
-The book logo was designed by
+The neutral-face book logo was designed by
 `Julien Deveaux <https://thenounproject.com/Julihan/>`_.
-
-see also
-========
-
-`Ask HN: What free or low-cost static site hosting do you use most?
-<https://news.ycombinator.com/item?id=13021722>`_
-
-https://hugotunius.se/2016/01/10/the-one-cent-blog.html

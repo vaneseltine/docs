@@ -48,12 +48,16 @@ html_theme_options = {
     "logo_name": False,
     "canonical_url": "https://misterdoubt.com",
     "logo_text_align": "center",
-    "description": "a book of customs, traditions, and principles",
-    "show_powered_by": True,
+    "description": (
+        r"con·sue·tu·di·nar·y:<br>"
+        # r"<em>noun</em>:<br>"
+        "a book of customs, traditions, and principles."
+    ),
+    "show_powered_by": False,
     "show_relbars": True,
     "show_related": False,
 }
 html_show_sphinx = False
 html_show_sourcelink = False
-
+html_show_copyright = False
 html_title = "consuetudinary"
