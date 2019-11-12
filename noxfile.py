@@ -163,14 +163,19 @@ def update_aws(session):
     shared_keys = repo_keys & site_keys
     print(f"{len(shared_keys):>3} shared keys...")
 
+    keys_that_need_updating = []
     for key in sorted(shared_keys):
         with NamedTemporaryFile() as tmp:
             s3.meta.client.download_file(SITE, key, tmp.name)
             site_content = Path(tmp.name).read_bytes()
         repo_content = current_repo[key].read_bytes()
-        path = key_to_path(key)
         if COMPLETE_REUPLOAD or repo_content != site_content:
-            upload(bucket, path=path, key=key)
+            keys_that_need_updating.append(key)
+
+    print(f"{len(keys_that_need_updating):>3} being updated.")
+    for key in keys_that_need_updating:
+        path = key_to_path(key)
+        upload(bucket, path=path, key=key)
 
     print("Complete!")
 
