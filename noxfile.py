@@ -76,7 +76,7 @@ def build(session):
         "sphinx",
         ".",
         str(BUILD_DIR),
-        "-q",  # only output problems
+        # "-q",  # only output problems
         "-a",  # don't reuse old output
         "-E",  # don't reuse previous environment
         "-n",  # nitpicky mode

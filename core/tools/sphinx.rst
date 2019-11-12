@@ -4,14 +4,17 @@
 sphinx
 ######
 
-https://www.sphinx-doc.org/en/master/usage/markdown.html
+- It's incredibly easy to plop :ref:`graphviz` into Sphinx. Hooray!
+- `Sphinx awesome list <https://github.com/yoloseem/awesome-sphinxdoc>`_.
 
-`Sphinx awesome list <https://github.com/yoloseem/awesome-sphinxdoc>`_.
 
-`sphinx-git
-<https://sphinx-git.readthedocs.io/en/stable/using.html#git-changelog-directive>`_
-provides two directives: ``git_changelog`` to include various changelogs;
-``git_commit_detail`` to detail the current commit at time of build.
+some handy extensions
+=====================
+
+`sphinx-git <https://sphinx-git.readthedocs.io/en/stable/using.html#git-changelog-directive>`_
+    - ``git_changelog`` to include various changelogs
+    - ``git_commit_detail`` to detail the current commit at time of build.
+
 
 some decent themes
 ==================
@@ -23,24 +26,3 @@ some decent themes
 - `OE <https://sphinx-themes.org/html/oe-sphinx-theme/oe_sphinx/basic.html>`_
 - `Fossaisa <https://sphinx-themes.org/html/sphinx-fossasia-theme/sphinx_fossasia_theme/basic.html>`_
 - `nameko <https://github.com/nameko/sphinx-nameko-theme>`_
-
-
-notes
-=====
-
-Considering improving the usefulness of genindex: `sphinx-doc.org :: directives
-<https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html>`_.
-
-graphviz
-========
-
-.. graphviz::
-
-    digraph graphname {
-        graph [rankdir=LR, bgcolor="transparent"]
-        a -> b
-        b -> c -> d
-        b -> e -> f
-        f -> g
-        d -> g
-    }

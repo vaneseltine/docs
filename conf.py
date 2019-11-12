@@ -8,7 +8,9 @@ author = "Matt VanEseltine"
 
 # -- General configuration ---------------------------------------------------
 
-extensions = ["sphinx.ext.graphviz"]
+extensions = ["sphinx.ext.graphviz", "sphinx.ext.autosectionlabel"]
+
+autosectionlabel_prefix_document = False
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -23,21 +25,26 @@ templates_path = ["templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "__pycache__" ".git", ".nox", ".venv", ".vscode"]
 
-# -- Options for HTML output -------------------------------------------------
+# -- General extensions ------------------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-# not completely unusable:
-# - basic
-# - classic
-# - sphinxdoc
-html_theme_path = [alabaster.get_path()]
-extensions += ["alabaster"]
-html_theme = "alabaster"
+extensions = ["sphinx.ext.graphviz", "sphinx.ext.autosectionlabel"]
+
+autosectionlabel_prefix_document = False
+
+# -- HTML output -------------------------------------------------------------
+
+html_show_sphinx = False
+html_show_sourcelink = False
+html_show_copyright = False
+html_title = "consuetudinary"
 
 # A Windows icon file (.ico) 16x16 or 32x32 pixels large.
 html_favicon = "./static/favicon.ico"
+
+# not completely unusable: alabaster; basic; classic; sphinxdoc
+html_theme_path = [alabaster.get_path()]
+extensions += ["alabaster"]
+html_theme = "alabaster"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -55,7 +62,3 @@ html_theme_options = {
     "show_relbars": True,
     "show_related": False,
 }
-html_show_sphinx = False
-html_show_sourcelink = False
-html_show_copyright = False
-html_title = "consuetudinary"
