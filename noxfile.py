@@ -127,7 +127,7 @@ def update_aws(session):
         content = path.read_bytes()
         content_type, encoding = guess_content_type(str(path), content)
 
-        # print(f"Uploading {key} ({content_type}, {encoding})")
+        print(f"Uploading {key} ({content_type}, {encoding})")
         bucket.put_object(
             Key=key,
             Body=content,
@@ -150,19 +150,18 @@ def update_aws(session):
     site_keys = set(site_objects)
 
     old_site_keys = site_keys - repo_keys
-    print(f"{len(old_site_keys):>3} old site keys")
+    print(f"{len(old_site_keys):>3} outdated site keys")
     for key in old_site_keys:
         print(f"Deleting {key}...")
         site_objects[key].delete()
 
     new_repo_keys = repo_keys - site_keys
-    print(f"{len(new_repo_keys):>3} new repo keys")
+    print(f"{len(new_repo_keys):>3} nice new repo keys")
     for key in new_repo_keys:
-        print(f"Uploading {key}...")
         upload(bucket, key=key)
 
     shared_keys = repo_keys & site_keys
-    print(f"{len(shared_keys):>3} shared keys")
+    print(f"{len(shared_keys):>3} shared keys...")
 
     for key in sorted(shared_keys):
         with NamedTemporaryFile() as tmp:
@@ -172,6 +171,8 @@ def update_aws(session):
         path = key_to_path(key)
         if COMPLETE_REUPLOAD or repo_content != site_content:
             upload(bucket, path=path, key=key)
+
+    print("Complete!")
 
 
 if __name__ == "__main__":
