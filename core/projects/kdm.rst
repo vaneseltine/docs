@@ -1,6 +1,3 @@
-.. index::
-    single: kdm
-
 kdm
 ===
 
