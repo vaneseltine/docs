@@ -62,3 +62,10 @@ html_theme_options = {
     "show_relbars": True,
     "show_related": False,
 }
+
+# -- reStructuredText magic --------------------------------------------------
+
+rst_prolog = """
+.. highlight:: python
+    :linenothreshold: 1
+"""
