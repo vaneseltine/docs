@@ -1,8 +1,8 @@
 pandas
 ######
 
-pd.crosstab()
---------------
+crosstabs
+---------
 
 Why do::
 
@@ -12,3 +12,11 @@ Why do::
 when you can::
 
     heatmap_df = pd.crosstab(diamonds.cut, diamonds.color)
+
+pivoting
+--------
+
+But pivots are useful.
+
+https://pbpython.com/pandas-pivot-table-explained.html
+

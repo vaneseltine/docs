@@ -30,6 +30,23 @@ SITE = "misterdoubt.com"
 
 @nox.session(python=False)
 def format(session):
+    def adjust_lines(rst):
+        changes = 0
+        last_len = 0
+        original_text = rst.read_text()
+        for line in fileinput.input(rst, inplace=True):
+            output = handle_line(line, last_len)
+            changes += line != output
+            print(output, end="")
+            last_len = len(line)
+        # pass
+        new_text = rst.read_text()
+        if len(original_text.splitlines()) != len(new_text.splitlines()):
+            print("YIKES!", "%" * 60, original_text, "&" * 60, new_text, sep="\n\n")
+            rst.write_text(original_text)
+            raise RuntimeError("Line counts did not match")
+        return changes
+
     def handle_line(line, last_len):
         if not re.match(r"^[=*#-]{3,}", line):
             return line
@@ -38,24 +55,27 @@ def format(session):
         new_line = line[0] * (last_len - 1) + "\n"
         return new_line
 
+    def newline_at_end(rst):
+        # else:
+        # content
+        # if line[-1] != "\n":
+        #     print(f"{rst} does not end with newline.")
+        with rst.open("rb") as f:
+            f.seek(-1, 2)
+            newline_okay = f.read() == b"\n"
+        if newline_okay:
+            return 0
+        with rst.open("a") as naughty_file:
+            naughty_file.write("\n")
+        return 1
+
     rsts = list(Path("./core").glob("**/*.rst"))
-    print(f"{len(rsts)} input files.")
+    print(f"RST files:{len(rsts):>4}")
     changes = 0
     for rst in rsts:
-        last_len = 0
-        original_text = rst.read_text()
-        for line in fileinput.input(rst, inplace=True):
-            output = handle_line(line, last_len)
-            changes += line != output
-            print(output, end="")
-            last_len = len(line)
-        new_text = rst.read_text()
-        if len(original_text.splitlines()) != len(new_text.splitlines()):
-            print("YIKES!", "%" * 60, original_text, "&" * 60, new_text, sep="\n\n")
-            rst.write_text(original_text)
-            raise RuntimeError("Line counts did not match")
-
-    print(f"{changes} lines changed.")
+        changes += adjust_lines(rst)
+        changes += newline_at_end(rst)
+    print(f"Changes:  {changes:>4}")
     return 0
 
 

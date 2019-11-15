@@ -12,3 +12,5 @@ https://en.wikipedia.org/wiki/Fleabag
 https://en.wikipedia.org/wiki/Russian_Doll_%28TV_series%29
 
 https://en.wikipedia.org/wiki/Maniac_(miniseries)
+
+https://en.wikipedia.org/wiki/American_Gods_(season_2)
