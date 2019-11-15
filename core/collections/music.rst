@@ -1,11 +1,14 @@
 music
 =====
 
-http://www.nin.wiki/The_Vietnam_War_Original_Score
-
 https://en.wikipedia.org/wiki/Dark_ambient
 
 http://ambientmusicguide.com/a-z-essential-albums/bluetech/
+
+Ishkur's Guide to Electronic Music - https://music.ishkur.com/
+
+Every Noise at Once - http://everynoise.com/
+e.g. http://everynoise.com/everynoise1d.cgi?root=trip%20hop&scope=all
 
 glitch
 ------

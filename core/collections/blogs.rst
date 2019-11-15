@@ -1,6 +1,8 @@
 blogs
 #####
 
+https://chrisalbon.com/
+
 http://blog.rtwilson.com/
 
 https://jvns.ca/
