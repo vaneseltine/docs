@@ -14,6 +14,10 @@ Adrian Borda, *Requiem for Peace*
 
 .. image:: ./visual/borda_requiem_for_peace.jpg
 
+Francisco Goya, *The Dog*
+
+.. image:: ./visual/goya_the_dog.jpg
+
 Hieronymus Bosch, *The Garden of Earthly Delights*
 - https://en.wikipedia.org/wiki/The_Garden_of_Earthly_Delights
 
