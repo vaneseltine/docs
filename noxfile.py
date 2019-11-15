@@ -30,6 +30,9 @@ SITE = "misterdoubt.com"
 
 @nox.session(python=False)
 def format(session):
+    if IN_WINDOWS:
+        session.skip("In Windows")
+
     def adjust_lines(rst):
         changes = 0
         last_len = 0
@@ -108,6 +111,8 @@ def build(session):
 
 @nox.session(python=False)
 def push(session):
+    if IN_WINDOWS:
+        session.skip("In Windows")
     git_output = subprocess.check_output(["git", "status", "--porcelain"])
     if git_output:
         print("Dirty repo:")

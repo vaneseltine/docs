@@ -1,5 +1,5 @@
 media
-=======
+=====
 
 .. toctree::
     :glob:
