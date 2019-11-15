@@ -1,6 +1,12 @@
 music
 =====
 
+http://www.nin.wiki/The_Vietnam_War_Original_Score
+
+https://en.wikipedia.org/wiki/Dark_ambient
+
+http://ambientmusicguide.com/a-z-essential-albums/bluetech/
+
 glitch
 ------
 
