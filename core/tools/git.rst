@@ -1,3 +1,5 @@
+.. highlight::
+
 git
 ###
 
@@ -5,7 +7,7 @@ how does one
 ============
 
 ...delete all traces of a file in a repo?
-------------------------------------------
+-----------------------------------------
 
 https://stackoverflow.com/questions/2100907/how-to-remove-delete-a-large-file-from-commit-history-in-git-repository
 
@@ -13,7 +15,9 @@ https://stackoverflow.com/questions/2100907/how-to-remove-delete-a-large-file-fr
 
 **Interactive rebase**
 
-With a history of::
+With a history of
+
+.. code-block::
 
     $ git lola --name-status
     * f772d66 (HEAD, master) Login page
