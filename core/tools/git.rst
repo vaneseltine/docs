@@ -1,5 +1,3 @@
-.. highlight::
-
 git
 ###
 
@@ -17,7 +15,7 @@ https://stackoverflow.com/questions/2100907/how-to-remove-delete-a-large-file-fr
 
 With a history of
 
-.. code-block::
+.. code-block:: bash
 
     $ git lola --name-status
     * f772d66 (HEAD, master) Login page
@@ -39,7 +37,9 @@ Thus, our plan going into an interactive rebase
 is to keep “Admin page,” edit “Careless,” and discard “Remove DVD-rip.”
 
 Running `$ git rebase -i 5af4522` starts an editor
-with the following contents::
+with the following contents
+
+.. code-block:: bash
 
     pick ce36c98 Careless
     pick cb14efd Remove DVD-rip
@@ -59,7 +59,9 @@ with the following contents::
     # However, if you remove everything, the rebase will be aborted.
     #
 
-Executing our plan, we modify it to::
+Executing our plan, we modify it to
+
+.. code-block:: bash
 
     edit ce36c98 Careless
     pick f772d66 Login page
@@ -72,7 +74,9 @@ change the operation on “Careless”
 to be `edit` rather than `pick`.
 
 Save-quitting the editor drops us at a command prompt
-with the following message::
+with the following message
+
+.. code-block:: bash
 
     Stopped at ce36c98... Careless
     You can amend the commit now, with
@@ -85,7 +89,9 @@ with the following message::
 
 As the message tells us,
 we are on the “Careless” commit we want to edit,
-so we run two commands::
+so we run two commands
+
+.. code-block:: bash
 
     $ git rm --cached oops.iso
     $ git commit --amend -C HEAD
@@ -97,7 +103,9 @@ and `-C HEAD` instructs git to reuse the old commit message.
 Finally, `git rebase --continue` goes ahead with the
 rest of the rebase operation.
 
-This gives a history of::
+This gives a history of
+
+.. code-block:: bash
 
     $ git lola --name-status
     * 93174be (HEAD, master) Login page

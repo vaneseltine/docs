@@ -1,10 +1,10 @@
-collect
+learn
 =======
 
 .. toctree::
     :glob:
     :maxdepth: 1
 
-    collections/*
+    learn/*
 
 
