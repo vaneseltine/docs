@@ -10,7 +10,6 @@ how does one
 https://stackoverflow.com/questions/2100907/how-to-remove-delete-a-large-file-from-commit-history-in-git-repository
 
 
-
 **Interactive rebase**
 
 With a history of

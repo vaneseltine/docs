@@ -1,21 +1,23 @@
 series
 ######
 
-https://www.imdb.com/title/tt9154158/episodes
+`You're Not a Monster <https://www.imdb.com/title/tt9154158/episodes>`_
 
 http://www.nin.wiki/The_Vietnam_War_Original_Score
 
 http://www.cc.com/video-clips/1s36j0/inside-amy-schumer-a-reasonable-chub and then the rest of Amy Schumer
 
-https://en.wikipedia.org/wiki/Fleabag
+`Fleabag <https://en.wikipedia.org/wiki/Fleabag>`_
 
-Barry
+`Get Krack'n <https://www.abc.net.au/tv/programs/get-krackn/>`_
 
-https://en.wikipedia.org/wiki/Russian_Doll_%28TV_series%29
+`Barry <https://en.m.wikipedia.org/wiki/Barry_%28TV_series%29>`_
 
-https://en.wikipedia.org/wiki/Maniac_(miniseries)
+`Russian Doll <https://en.wikipedia.org/wiki/Russian_Doll_%28TV_series%29>`_
 
-https://en.wikipedia.org/wiki/American_Gods_(season_2)
+`Maniac <https://en.wikipedia.org/wiki/Maniac_%28miniseries%29>`_
+
+`American Gods (2) <https://en.wikipedia.org/wiki/American_Gods_%28season_2%29>`_
 
 Over the Garden Wall
     - https://en.m.wikipedia.org/wiki/Over_the_Garden_Wall
