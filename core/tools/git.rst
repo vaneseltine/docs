@@ -142,3 +142,22 @@ https://stackoverflow.com/questions/7203515/git-how-to-find-a-deleted-file-in-th
     ``git checkout <SHA>^ -- <path-to-file>``
 
     Note the caret symbol (^), which gets the checkout prior to the one identified, because at the moment of <SHA> commit the file is deleted, we need to look at the previous commit to get the deleted file's contents
+
+
+...just erase a bunch of history or clear out a repo?
+-----------------------------------------------------
+
+.. code-block:: bash
+
+        git clone https://github.com/user/user-repo.git
+        cd user-repo
+        git reset --hard tags/v2.0
+
+        rm -rf .git/
+        git init
+        git add .
+        git commit -m 'first commit'
+
+        git remote add stash ssh://git@myserver:7999/myproject/user-repo.git
+        git push --force stash master
+
