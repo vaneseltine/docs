@@ -1,29 +1,15 @@
 synth
-<<<<<<< HEAD
 #########
 
 
 example setup
 --------------
-=======
-#####
-
-
-example setup
--------------
->>>>>>> Blah
 
 BoBeats -- Let’s Build a Synthesizer Setup @ https://www.youtube.com/watch?v=FQz5xifbPFw
 
 
-<<<<<<< HEAD
 keyful
 --------
-=======
-
-keyful
-------
->>>>>>> Blah
 
 
 Arturia Minibrute 2/2s
@@ -34,11 +20,7 @@ Korg Minilogue XD $700
 Moog Grandmother $900
 
 keyless
-<<<<<<< HEAD
 --------------
-=======
--------
->>>>>>> Blah
 
 Moog Mother-32
     - BoBeats https://www.youtube.com/watch?v=bLWzmYjtMHQ
@@ -48,19 +30,11 @@ Roland SE-02
         - "One of the best sounding monosynths < 500 EU"
 
 modular
-<<<<<<< HEAD
 --------
 
 
 seqdrumixampler
 ---------------------
-=======
--------
-
-
-seqdrumixampler
----------------
->>>>>>> Blah
 
 Arturia DrumBrute Impact (2018) $300, $250
     - **analog; drum; sequencer**
@@ -82,11 +56,7 @@ Maschine3
 Roland Rhythm Composer TR-08
 
 midi keyboard
-<<<<<<< HEAD
 --------------
-=======
--------------
->>>>>>> Blah
 
 Volca Keys
     - $130, $100
@@ -94,7 +64,6 @@ Volca Keys
 Arturia Keystep
     - $130, 110
     - Has MIDI *and* CV output!
-<<<<<<< HEAD
     - No AC adapter is ok -> USB
 
 investigate
@@ -106,13 +75,5 @@ see also
 ---------
 
 gear matrix @ https://docs.google.com/spreadsheets/d/1agXr4-GmQCWG-CtJ4pUSVU-E0voWJlgfD1de04ywYww/
-=======
-    - Make sure to get AC adapter too
 
-
-
-investigate
------------
-
-BEHRINGER Synthesizer (MODELD)
->>>>>>> Blah
+G4 D#5 G5 D#6 G5 C# G C G
